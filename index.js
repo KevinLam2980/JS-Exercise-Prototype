@@ -84,10 +84,14 @@ Car.prototype.fill = function(gallons){
 }
 
 Car.prototype.drive = function(distance){
-  this.odometer += distance;
-  this.tank -= (distance * this.milesPerGallon);
-  if(this.tank <= 0){
+  
+  if((this.tank * this.milesPerGallon) < distance){
+    this.odometer += this.milesPerGallon * this.tank;
+    this.tank = 0;
     return `I ran out of fuel at ${this.odometer} miles!`
+  } else {
+      this.odometer += distance
+      this.tank -= (distance/this.milesPerGallon);
   }
 }
 
@@ -115,10 +119,10 @@ Baby.prototype.play = function(){
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. When in the global scopr, this will refer to the window object, as it is the object that contains the this key word
+  2. Implicit binding means that the object after the .this is what the .this is binded to.
+  3. When using new to create a new object, the this is binded to that new object being created by the constructor function.
+  4. When using methods like apply or call, the this is binded to those objects.
 */
 
 
